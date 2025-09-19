@@ -13,19 +13,19 @@ namespace ToDoList.Domain.ToDoList
         public void ValidateInvariates()
         {
             if (CreatedDate is null)
-                throw new Exception("why your task has not created date?!");
+                throw new Exception(ErrorMessages.EveryTaskShouldHaveCreateDate);
 
             if ((CurrentState != State.Done || CurrentState != State.Reject) && CompletedDate is null)
-                throw new Exception("Completed task should have date");
+                throw new Exception(ErrorMessages.CompleteTaskShouldHaveDate);
 
             if (string.IsNullOrEmpty(Title))
-                throw new Exception("title should not be null or empty");
+                throw new Exception(ErrorMessages.EveryTaskShouldHaveTitle);
 
             if (string.IsNullOrEmpty(Description))
-                throw new Exception("descroption should not be null or empty");
+                throw new Exception(ErrorMessages.EveryTaskShouldHaveDescription);
 
             if (Description.Length < 2)
-                throw new Exception("your description is too small");
+                throw new Exception(ErrorMessages.DescriptionShouldHaveMoreThan2Length);
         }
         public ToDoList(string description, string title, State currentState)
         {
@@ -47,20 +47,20 @@ namespace ToDoList.Domain.ToDoList
         public void ChangeState(State state)
         {
             if (CurrentState == State.Done || CurrentState == State.Reject)
-                throw new Exception();
+                throw new Exception(ErrorMessages.CompletedTaskCanNotBeChange);
 
             CurrentState = state;
         }
         public void ChangeDescription(string description)
         {
             if (string.IsNullOrEmpty(description))
-                throw new Exception();
+                throw new Exception(ErrorMessages.EveryTaskShouldHaveDescription);
             Description = description;
         }
         public void ChangeTitle(string title)
         {
             if (string.IsNullOrEmpty(title))
-                throw new Exception();
+                throw new Exception(ErrorMessages.EveryTaskShouldHaveTitle);
             Title = title;
         }
 

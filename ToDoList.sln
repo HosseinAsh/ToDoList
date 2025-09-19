@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoList.Application", "ToD
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoList.EndPoint", "ToDoList.EndPoint\ToDoList.EndPoint.csproj", "{0C2BCC8E-0343-4ED0-9EBE-E2835FA8764C}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,6 +38,12 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{EEC524BE-8397-4371-9732-E13B47DF6B28} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{1273A35A-9AB2-43F4-9944-62FB0B7A61E9} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{8F2BFDB8-7D53-450F-9853-47501E2EE597} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{0C2BCC8E-0343-4ED0-9EBE-E2835FA8764C} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {438FCD05-C31B-4716-AE80-5877B67614B9}
