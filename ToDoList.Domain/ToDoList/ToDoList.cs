@@ -9,6 +9,7 @@ namespace ToDoList.Domain.ToDoList
         public string Title { get; private set; }
         public State CurrentState { get; private set; }
         public long? CreatedDate { get; private set; }
+        public long DueDate { get; private set; }
         public long? CompletedDate { get; private set; }
         public void ValidateInvariates()
         {
@@ -27,22 +28,38 @@ namespace ToDoList.Domain.ToDoList
             if (Description.Length < 2)
                 throw new Exception(ErrorMessages.DescriptionShouldHaveMoreThan2Length);
         }
-        public ToDoList(string description, string title, State currentState)
+
+        public ToDoList(string description, string title, long dueDate)
         {
             Id = Guid.NewGuid();
             Description = description;
             Title = title;
-            CurrentState = currentState;
+            DueDate = dueDate;
         }
-        public ToDoList CreateToDoList(string description, string title, long? createdDate)
+        public ToDoList(Guid id, string description, string title)
         {
-            var todoList = new ToDoList(description, title, State.New);
-
-            todoList.RaiseDomainEvent(new ToDoListCreatedDomainEvent(todoList.Id));
+            Id = id;
+            Description = description;
+            Title = title;
+        }
+        private ToDoList()
+        {
+            
+        }
+        public ToDoList CreateToDoList()
+        {
+            RaiseDomainEvent(new ToDoListCreatedDomainEvent(Id));
 
             CreatedDate = DateTime.UtcNow.Millisecond;
-
-            return todoList;
+            CurrentState = State.New;
+            return this;
+        }
+        public void RemovePosibility()
+        {
+            if (CurrentState == State.Done)
+            {
+                throw new Exception("we can not remove done tasks");
+            }
         }
         public void ChangeState(State state)
         {

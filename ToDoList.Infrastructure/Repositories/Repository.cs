@@ -20,18 +20,28 @@ namespace ToDoList.Infrastructure.Repositories
                 .Set<T>()
                 .FirstOrDefaultAsync(task => task.Id == id, cancellationToken);
         }
-        public void Add(T entity)
+        public async Task<Guid> Add(T entity)
         {
             DbContext.Add(entity);
+            await DbContext.SaveChangesAsync();
+            return entity.Id;
         }
-        public void Update(T entity)
+        public async Task<IEnumerable<T>> GetAllAsync(CancellationToken cancellationToken = default)
+        {
+            return await DbContext.Set<T>()
+                .ToListAsync();
+        }
+        public async Task Update(T entity)
         {
             DbContext.Update(entity);
+            await DbContext.SaveChangesAsync();
         }
-        public void Delete(T entity)
+        public async Task Delete(T entity)
         {
             DbContext.Remove(entity);
+            await DbContext.SaveChangesAsync();
         }
+
 
     }
 }
